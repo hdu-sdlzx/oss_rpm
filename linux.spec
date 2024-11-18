@@ -10,7 +10,6 @@ Source1:	linux.config
 
 BuildRequires:	gcc make flex bison elfutils-devel
 BuildRequires:	openssl openssl-devel openssl-devel-engine
-BuildRequires:	dwarves
 
 %description
 Linux is a clone of the operating system Unix, written from scratch by Linus Torvalds
@@ -32,5 +31,8 @@ make -j${RPM_BUILD_NCPUS}
 %files
 
 %changelog
+* Mon Nov 18 2024 Liu Zixian <hdu_sdlzx@163.com> 6.11.8-2
+- Remove BuildRequires dwarves
+
 * Mon Nov 18 2024 Liu Zixian <hdu_sdlzx@163.com> 6.11.8-1
 - init
