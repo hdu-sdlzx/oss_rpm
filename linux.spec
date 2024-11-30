@@ -1,5 +1,5 @@
 Name:		linux
-Version:	6.11.8
+Version:	6.12.1
 Release:	1
 Summary:	The Linux kernel
 License:	GPL-2.0 WITH Linux-syscall-note
@@ -31,6 +31,9 @@ make -j${RPM_BUILD_NCPUS}
 %files
 
 %changelog
+* Sat Nov 30 2024 Liu Zixian <hdu_sdlzx@163.com> 6.12.1-1
+- update to 6.12.1
+
 * Mon Nov 18 2024 Liu Zixian <hdu_sdlzx@163.com> 6.11.8-2
 - Remove BuildRequires dwarves
 
