@@ -11,8 +11,10 @@ BuildRequires: gcc perl
 
 # replace fedora official packages
 Obsoletes:  openssl-libs < 1:%{version}
+Obsoletes:  openssl-devel < 1:%{version}
 Provides:   openssl-libs = 1:%{version}
 Provides:   openssl-libs%{?_isa} = 1:%{version}
+Provides:   openssl-devel = 1:%{version}
 
 %description
 The OpenSSL software library is a robust, commercial-grade, full-featured toolkit for general-purpose cryptography and secure communication.
