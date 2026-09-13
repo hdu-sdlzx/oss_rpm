@@ -1,5 +1,5 @@
 Name:		curl
-Version:	8.13.0
+Version:	8.22.0
 Release:	1
 Summary:	command line tool and library for transferring data with URLs
 License:	curl
@@ -7,8 +7,7 @@ URL:		https://curl.se/
 
 Source0:	https://curl.se/download/%{name}-%{version}.tar.xz
 
-BuildRequires: gcc openssl
-BuildRequires: autoconf automake libtool
+BuildRequires: gcc cmake openssl zlib
 
 # replace fedora official packages
 Obsoletes:  curl < %{version}
@@ -28,33 +27,25 @@ curl is used daily by virtually every Internet-using human on the globe.
 %autosetup
 
 %build
-autoreconf -fi
-mkdir build && cd build
-# libpsl is disabled to keep build requirements minimal
-# ntlm requires DES3 which is deprecated in openssl
-../configure --prefix=%{_prefix} --libdir=%{_libdir} \
-    --disable-docs \
-    --disable-ntlm \
-    --with-openssl \
-    --without-libpsl
-
-%make_build
+%cmake \
+    -DBUILD_CURL_EXE=OFF \
+    -DBUILD_LIBCURL_DOCS=OFF -DBUILD_MISC_DOCS=OFF \
+    -DCURL_USE_LIBPSL=OFF \
+    -DCURL_ZLIB=ON -DCURL_ZSTD=ON
+%cmake_build
 
 %install
-cd build
-%make_install
+%cmake_install
 
 %files
-%{_bindir}/curl
 %{_bindir}/curl-config
 %{_includedir}/%{name}
 %{_libdir}/libcurl.so
 %{_libdir}/libcurl.so.4
 %{_libdir}/libcurl.so.4.8.0
-%{_libdir}/libcurl.a
+%{_libdir}/cmake/*
 %{_libdir}/pkgconfig/libcurl.pc
-%{_datadir}/aclocal/libcurl.m4
 
 %changelog
-* Sat May 17 2025 Liu Zixian <hdu_sdlzx@163.com> 8.13.0-1
+* Sun Sep 13 2026 Liu Zixian <hdu_sdlzx@163.com> 8.22.0-1
 - init
