@@ -1,5 +1,5 @@
 Name:		openssl
-Version:	3.5.0
+Version:	4.0.2
 Release:	1
 Summary:	A toolkit for general-purpose cryptography and secure communication.
 License:	Apache-2.0
@@ -25,12 +25,10 @@ The OpenSSL software library is a robust, commercial-grade, full-featured toolki
 %build
 ./Configure --prefix=%{_prefix} \
     --openssldir=%{_sysconfdir}/%{name} \
-    no-docs no-tests \
-    no-legacy no-engine no-deprecated \
-    no-apps
-# The following configs will break fedora compatibility:
-# no-engine: libcurl needs ENGINE_init
-# no-deprecated: librpm-sequoia needs RSA_set0_key
+    no-apps no-docs no-tests \
+    no-legacy no-deprecated \
+    no-comp \
+    enable-ktls enable-tfo enable-ec_nistp_64_gcc_128
 %make_build
 
 %install
@@ -39,10 +37,10 @@ The OpenSSL software library is a robust, commercial-grade, full-featured toolki
 %files
 %{_includedir}/%{name}
 %{_libdir}/libssl.so
-%{_libdir}/libssl.so.3
+%{_libdir}/libssl.so.4
 %{_libdir}/libssl.a
 %{_libdir}/libcrypto.so
-%{_libdir}/libcrypto.so.3
+%{_libdir}/libcrypto.so.4
 %{_libdir}/libcrypto.a
 %{_libdir}/cmake/OpenSSL
 %{_libdir}/pkgconfig/openssl.pc
@@ -51,5 +49,5 @@ The OpenSSL software library is a robust, commercial-grade, full-featured toolki
 %{_sysconfdir}/%{name}
 
 %changelog
-* Sun May 04 2025 Liu Zixian <hdu_sdlzx@163.com> 3.5.0-1
+* Sun Sep 13 2026 Liu Zixian <hdu_sdlzx@163.com> 4.0.2-1
 - init
